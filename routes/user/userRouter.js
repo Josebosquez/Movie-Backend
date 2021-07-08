@@ -33,3 +33,5 @@ router.post(
 );
 
 module.exports = router;
+
+// userRouter handles all of our paths and how those paths are checked.

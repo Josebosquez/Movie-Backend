@@ -24,3 +24,5 @@ module.exports = {
   checkIsAlpha,
   checkIsAlphanumeric,
 };
+
+// this page just handles our extra validator functions. This is to help us with our controller and not have it too bunched up with code.

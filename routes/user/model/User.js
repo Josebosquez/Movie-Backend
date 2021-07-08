@@ -21,3 +21,4 @@ const userSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("user", userSchema);
+// our schema for our server.

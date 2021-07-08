@@ -1,4 +1,5 @@
 class ErrorMessageHandlerClass extends Error {
+  // extends ... an obj in this case an error obj. this Error obj is built in to node
   constructor(message, statusCode) {
     super(message, statusCode);
 
@@ -11,3 +12,5 @@ class ErrorMessageHandlerClass extends Error {
 }
 
 module.exports = ErrorMessageHandlerClass;
+
+// this preps our error object for good looking error objects not shit err msgs we dont use or cant read

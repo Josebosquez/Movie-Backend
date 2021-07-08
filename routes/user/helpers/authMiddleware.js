@@ -3,15 +3,16 @@ const {
   checkIsAlpha,
   checkIsAlphanumeric,
 } = require("../../utils/authMethods");
+// we take in our authmethods.js 
 
 function checkIsEmailFunc(req, res, next) {
-  const { errorObj } = res.locals;
+  const { errorObj } = res.locals; 
 
   if (!checkIsEmail(req.body.email)) {
-    errorObj.wrongEmailFormat = "Must be in email format!";
-  }
+    errorObj.wrongEmailFormat = "Must be in email format!"; 
+  } // this checks our email input box. If it doesnt match the email format, then it will return err. 
 
-  next();
+  next(); // if no err, keep going. 
 }
 
 function checkIsAlphaFunc(req, res, next) {
@@ -23,18 +24,18 @@ function checkIsAlphaFunc(req, res, next) {
         errorObj[`${key}`] = `${key} can only have characters`;
       }
     }
-  }
+  } // this checks our first name and last name input box. If it doesnt match the  format, then it will return err. 
 
-  next();
+  next(); // if no err, keep going. 
 }
 
 function checkIsAlphanumericFunc(req, res, next) {
   const { errorObj } = res.locals;
   if (!checkIsAlphanumeric(req.body.username)) {
     errorObj.usernameError = "username can only have characters and numbers";
-  }
+  }  // this checks our username input box. If it doesnt match the username format, then it will return err. 
 
-  next();
+  next(); // if no err, keep going. 
 }
 
 module.exports = {

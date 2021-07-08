@@ -1,6 +1,6 @@
 const { checkIsEmpty } = require("../../utils/authMethods");
 
-//this function checks any incoming data is empty if is empty send error message back
+//this function checks any incoming data is empty. if is empty send error message back
 //else go to the next middleware function next()
 function checkIsEmptyFunc(req, res, next) {
   let inComingData = req.body;

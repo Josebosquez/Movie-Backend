@@ -26,13 +26,17 @@ async function signup(req, res, next) {
 
     await createdUser.save();
 
+    // we dont need to have saveduser. ----- let savedUser = await createdUser.save(); 
+
     res.json({ message: "success - user created" });
+    // we do not send payload back to user.
+
   } catch (e) {
     // console.log(e);
     // console.log(e.message);
     //res.status(500).json({ message: "error", error: e });
     //console.log("1");
-    next(e);
+    next(e); // this function is going to errorController in app.js
   }
 }
 
@@ -46,9 +50,9 @@ async function login(req, res) {
   }
 
   try {
-    let foundUser = await User.findOne({ email: email });
+    let foundUser = await User.findOne({ email: email }); // we use our email when logging in to find our server email.
 
-    if (!foundUser) {
+    if (!foundUser) { // if the server doesnt have the email, we send an err message.
       res.status(400).json({
         message: "failure",
         payload: "Please check your email and password",
@@ -57,23 +61,23 @@ async function login(req, res) {
       //password = 1, foundUser.password = $2a$12$tauL3AEb5gvKdcQdDKNWLeIYv422jNq2aRsaNWF5J4TdcWEdhq4CO
       let comparedPassword = await bcrypt.compare(password, foundUser.password);
 
-      if (!comparedPassword) {
+      if (!comparedPassword) { // if the password is not the same as our server password,
         res.status(400).json({
           message: "failure",
           payload: "Please check your email and password",
         });
       } else {
-        let jwtToken = jwt.sign(
+        let jwtToken = jwt.sign( // shows what we want exposed and wat we dont want exposed
           {
-            email: foundUser.email,
+            email: foundUser.email, // is to expose only the email address
           },
-          process.env.PRIVATE_JWT_KEY,
+          process.env.PRIVATE_JWT_KEY, // from our env file.
           {
-            expiresIn: "1d",
+            expiresIn: "1d", // how long jwt is good for
           }
         );
 
-        res.json({ message: "success", payload: jwtToken });
+        res.json({ message: "success", payload: jwtToken }); 
       }
     }
   } catch (e) {
